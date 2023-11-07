@@ -15,8 +15,6 @@ def greeting():
 def get_users():
     return client.get_users() 
 
-@app.route("/appenduser")
-def append_user():
-    new_user = User(1,"Emerson")
+@app.post("/adduser")
+def append_user(new_user):
     client.add_user(new_user)
-    return "OK"
