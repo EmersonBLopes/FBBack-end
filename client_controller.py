@@ -11,6 +11,7 @@ class Client:
         return data_frame.to_json(orient="records")
 
     def add_user(self,new_user):
-        df = pd.DataFrame([[new_user.get_id(),new_user.get_name()]],columns=["ID","name"]) 
+        df = pd.DataFrame([[new_user.get_id(),new_user.get_name(),new_user.get_last_name(),new_user.get_email()]],columns=["ID","name","last_name","email"]) 
+        excel_db = pd.read_excel("database.xlsx","usuarios")
         print(df)
         df.to_excel("database.xlsx","usuarios",index=False)

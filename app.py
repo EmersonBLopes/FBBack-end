@@ -20,8 +20,10 @@ def get_users():
 
 @app.route("/adduser",methods=["POST"])
 def append_user():
-    requeststr = str(request.data)
-    new_user = json.loads(requeststr)
-    print(requeststr)
-    
+
+    json_client = json.loads(request.data)
+    print(json_client["name"])
+    new_user = User(json_client["ID"],json_client["name"],json_client["last_name"],json_client["email"])
+
+    client.add_user(new_user)
     return "ok"
