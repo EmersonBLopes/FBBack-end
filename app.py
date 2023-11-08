@@ -1,6 +1,9 @@
 from flask import Flask
+from flask import request
+from flask import Response
 from client_controller import Client 
 from user import User
+import json
 
 app = Flask(__name__)
 
@@ -11,10 +14,14 @@ def greeting():
     mensagem = f'<h1>Bem-Vindo a API do ...</h1>\n<p>Para mais informações consulte a documentação</p>'
     return mensagem
 
-@app.get("/users")
+@app.route("/users")
 def get_users():
     return client.get_users() 
 
-@app.post("/adduser")
-def append_user(new_user):
-    client.add_user(new_user)
+@app.route("/adduser",methods=["POST"])
+def append_user():
+    requeststr = str(request.data)
+    new_user = json.loads(requeststr)
+    print(requeststr)
+    
+    return "ok"
